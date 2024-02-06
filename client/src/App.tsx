@@ -4,8 +4,22 @@ import Layout from "./Layout/Layout";
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Layout></Layout>} />
-      <Route path="search" element={<>SearchPage</>} />
+      <Route
+        path="/"
+        element={
+          <Layout>
+            <p>Home page</p>
+          </Layout>
+        }
+      />
+      <Route
+        path="/search"
+        element={
+          <Layout>
+            <p>Searchpage</p>
+          </Layout>
+        }
+      />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
