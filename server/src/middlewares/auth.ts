@@ -13,10 +13,14 @@ export const verifyToken = (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.cookies.token || req.headers?.authorization;
+  let token = req.cookies?.token || req.headers?.authorization;
+
+  if (token && token.startsWith("Bearer ")) {
+    token = token.split(" ")[1];
+  }
 
   if (!token) {
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json({ success: false, message: "Unauthorized" });
   }
 
   try {
@@ -26,6 +30,6 @@ export const verifyToken = (
     next();
   } catch (error: any) {
     console.error(error);
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json({ success: false, message: "Unauthorized" });
   }
 };

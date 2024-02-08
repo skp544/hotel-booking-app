@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 // import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { registerApi } from "../api/auth";
+import { useAppContext } from "../contexts/AppContext";
 import { RegisterFormData } from "../types";
 
 const Register = () => {
@@ -12,6 +13,8 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFormData>();
+
+  const { isAuth } = useAppContext();
 
   // const mutation = useMutation(registerApi, {
   //   onSuccess: () => {
@@ -36,7 +39,7 @@ const Register = () => {
     localStorage.setItem("user", JSON.stringify(response.user));
 
     toast.success(response.message);
-
+    isAuth();
     navigate("/");
   });
 

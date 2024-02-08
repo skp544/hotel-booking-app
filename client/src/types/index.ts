@@ -5,3 +5,8 @@ export type RegisterFormData = {
   password: string;
   confirmPassword: string;
 };
+
+export type AppContext = {
+  success: boolean;
+  isAuth: () => void;
+};

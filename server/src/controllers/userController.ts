@@ -4,6 +4,14 @@ import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 import User from "../models/userModel";
 
+declare global {
+  namespace Express {
+    interface Request {
+      userId: string;
+    }
+  }
+}
+
 export const registerUser = async (req: Request, res: Response) => {
   const errors = validationResult(req);
 
@@ -140,7 +148,7 @@ export const validateToken = async (req: Request, res: Response) => {
     return res
       .status(200)
       .json({ success: true, message: "Token is valid", userId: req.userId });
-  } catch (error) {
+  } catch (error: any) {
     console.log("Error in validateToken controller");
     console.error(error);
     return res.status(500).json({ success: false, message: error.message });
