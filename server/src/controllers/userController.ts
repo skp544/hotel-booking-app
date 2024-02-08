@@ -55,7 +55,12 @@ export const registerUser = async (req: Request, res: Response) => {
     return res.status(201).json({
       success: true,
       message: "User created successfully!",
-      user: newUser,
+      user: {
+        _id: newUser._id,
+        email: newUser.email,
+        firstName: newUser.firstName,
+        lastName: newUser.lastName,
+      },
       token,
     });
   } catch (error: any) {
@@ -111,7 +116,12 @@ export const loginUser = async (req: Request, res: Response) => {
     return res.status(200).json({
       success: true,
       message: "User logged in successfully!",
-      user,
+      user: {
+        _id: user._id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
       token,
     });
   } catch (error: any) {
