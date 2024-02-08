@@ -8,6 +8,7 @@ export const registerApi = async (formData: RegisterFormData) => {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials: true,
     });
 
     return data;

@@ -39,7 +39,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
     // Sign the token
     const token = jwt.sign(
-      { id: newUser._id },
+      { userId: newUser._id },
       process.env.JWT_SECRET as string,
       {
         expiresIn: "1d",
@@ -103,9 +103,13 @@ export const loginUser = async (req: Request, res: Response) => {
 
     // Sign the token
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET as string, {
-      expiresIn: "1d",
-    });
+    const token = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_SECRET as string,
+      {
+        expiresIn: "1d",
+      }
+    );
 
     res.cookie("token", token, {
       httpOnly: true,
@@ -126,6 +130,18 @@ export const loginUser = async (req: Request, res: Response) => {
     });
   } catch (error: any) {
     console.log("Error in login User controller");
+    console.error(error);
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export const validateToken = async (req: Request, res: Response) => {
+  try {
+    return res
+      .status(200)
+      .json({ success: true, message: "Token is valid", userId: req.userId });
+  } catch (error) {
+    console.log("Error in validateToken controller");
     console.error(error);
     return res.status(500).json({ success: false, message: error.message });
   }
