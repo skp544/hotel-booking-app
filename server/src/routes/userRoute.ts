@@ -33,4 +33,5 @@ router.post("/login", [
 ]);
 
 router.get("/validate-token", verifyToken, validateToken);
+
 export default router;

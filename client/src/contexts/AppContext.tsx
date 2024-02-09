@@ -11,32 +11,28 @@ export const AppContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [success, setSuccess] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
 
   const isAuth = async () => {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      setLoading(false);
       return setSuccess(false);
     }
 
     try {
-      setLoading(true);
       const response = await validateTokenApi();
       setSuccess(response.success);
       if (!response.success) {
-        toast.error(response.message);
+        return toast.error(response.message);
       }
     } catch (error) {
-      toast.error("An error occurred");
-    } finally {
-      setLoading(false);
+      return toast.error("An error occurred");
     }
   };
+
   useEffect(() => {
     isAuth();
-  }, [loading]);
+  }, []);
 
   return (
     <AppContext.Provider

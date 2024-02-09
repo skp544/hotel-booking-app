@@ -26,9 +26,11 @@ export const verifyToken = (
   try {
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
+
     req.userId = (decoded as JwtPayload).userId;
     next();
   } catch (error: any) {
+    console.log("Error in verifyToken middleware");
     console.error(error);
     return res.status(401).json({ success: false, message: "Unauthorized" });
   }

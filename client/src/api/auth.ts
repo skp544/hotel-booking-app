@@ -1,5 +1,5 @@
 import { catchError, getToken } from "../helper";
-import { RegisterFormData } from "../types";
+import { RegisterFormData, SignInFormData } from "../types";
 import client from "./client";
 
 export const registerApi = async (formData: RegisterFormData) => {
@@ -11,6 +11,20 @@ export const registerApi = async (formData: RegisterFormData) => {
       withCredentials: true,
     });
 
+    return data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+export const loginApi = async (formData: SignInFormData) => {
+  try {
+    const { data } = await client.post("/auth/login", formData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    });
     return data;
   } catch (error) {
     return catchError(error);

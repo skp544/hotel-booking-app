@@ -10,3 +10,8 @@ export type AppContext = {
   success: boolean;
   isAuth: () => void;
 };
+
+export type SignInFormData = {
+  email: string;
+  password: string;
+};
