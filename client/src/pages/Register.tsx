@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 // import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerApi } from "../api/auth";
 import { useAppContext } from "../contexts/AppContext";
 import { RegisterFormData } from "../types";
@@ -135,7 +135,16 @@ const Register = () => {
         )}
       </label>
 
-      <span>
+      <span className=" flex items-center justify-between">
+        <span className="text-sm">
+          Already have an account?{" "}
+          <Link
+            to={"/sign-in"}
+            className=" text-blue-600 hover:underline font-bold"
+          >
+            Sign In
+          </Link>
+        </span>
         <button
           type="submit"
           className=" bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl rounded-md"

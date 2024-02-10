@@ -34,13 +34,13 @@ const Header = () => {
               <div className=" flex items-center gap-4">
                 <Link
                   to={"/my-bookings"}
-                  className=" flex items-center justify-center text-blue-600 px-3 py-1 font-bold rounded-md bg-white hover:bg-gray-100 transition-all duration-200 text-nowrap"
+                  className=" flex items-center justify-center text-white px-3 py-1 font-bold rounded-md transition-all duration-200 text-nowrap hover:bg-blue-600"
                 >
                   My Bookings
                 </Link>
                 <Link
                   to={"/my-hotels"}
-                  className=" flex items-center justify-center text-blue-600 px-3 py-1 font-bold rounded-md bg-white hover:bg-gray-100 transition-all duration-200 text-nowrap"
+                  className=" flex items-center justify-center text-white px-3 py-1 font-bold rounded-md  transition-all  duration-200 text-nowrap hover:bg-blue-600"
                 >
                   My Hotels
                 </Link>

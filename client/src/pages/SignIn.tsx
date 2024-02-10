@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 import { loginApi } from "../api/auth";
 import { useAppContext } from "../contexts/AppContext";
 import { SignInFormData } from "../types";
-import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const { isAuth } = useAppContext();
@@ -69,7 +69,16 @@ const SignIn = () => {
         )}
       </label>
 
-      <span>
+      <span className=" flex items-center justify-between">
+        <span className=" text-sm ">
+          Don't have an account?{" "}
+          <Link
+            to="/sign-up"
+            className=" text-blue-600 font-bold hover:underline"
+          >
+            Sign Up
+          </Link>
+        </span>
         <button
           type="submit"
           className=" bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl rounded-md"

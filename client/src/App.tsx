@@ -23,7 +23,7 @@ const App = () => {
         }
       />
       <Route
-        path="/register"
+        path="/sign-up"
         element={
           <Layout>
             <Register />
