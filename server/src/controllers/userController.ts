@@ -154,3 +154,14 @@ export const validateToken = async (req: Request, res: Response) => {
     return res.status(500).json({ success: false, message: error.message });
   }
 };
+
+export const logout = async (req: Request, res: Response) => {
+  try {
+    res.clearCookie("token");
+    return res.status(200).json({ success: true, message: "User logged out" });
+  } catch (error: any) {
+    console.log("Error in logout controller");
+    console.error(error);
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};

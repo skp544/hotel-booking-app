@@ -46,3 +46,18 @@ export const validateTokenApi = async () => {
     return catchError(error);
   }
 };
+
+export const logoutApi = async () => {
+  try {
+    const { data } = await client.get("/auth/logout", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    });
+
+    return data;
+  } catch (error) {
+    return catchError(error);
+  }
+};

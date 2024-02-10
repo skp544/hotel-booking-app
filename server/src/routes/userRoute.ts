@@ -2,6 +2,7 @@ import express from "express";
 import { check } from "express-validator";
 import {
   loginUser,
+  logout,
   registerUser,
   validateToken,
 } from "../controllers/userController";
@@ -33,5 +34,7 @@ router.post("/login", [
 ]);
 
 router.get("/validate-token", verifyToken, validateToken);
+
+router.get("/logout", logout);
 
 export default router;

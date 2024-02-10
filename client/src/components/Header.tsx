@@ -1,8 +1,26 @@
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import { logoutApi } from "../api/auth";
 import { useAppContext } from "../contexts/AppContext";
 
 const Header = () => {
-  const { success } = useAppContext();
+  const { success, isAuth } = useAppContext();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    const response = await logoutApi();
+
+    if (!response.success) {
+      return toast.error(response.message);
+    }
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    isAuth();
+    // localStorage.clear();
+    toast.success(response.message);
+    navigate("/sign-in");
+  };
 
   return (
     <div className=" bg-blue-800 py-6 ">
@@ -26,7 +44,10 @@ const Header = () => {
                 >
                   My Hotels
                 </Link>
-                <button className=" flex items-center justify-center text-blue-600 px-3 py-1 font-bold rounded-md bg-white hover:bg-gray-100 transition-all duration-200 text-nowrap">
+                <button
+                  onClick={handleSignOut}
+                  className=" flex items-center justify-center text-blue-600 px-3 py-1 font-bold rounded-md bg-white hover:bg-gray-100 transition-all duration-200 text-nowrap"
+                >
                   Sign Out
                 </button>
               </div>
