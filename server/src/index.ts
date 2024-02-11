@@ -1,9 +1,10 @@
+import cookieparser from "cookie-parser";
 import cors from "cors";
 import "dotenv/config";
 import express from "express";
+import cloudinaryConnect from "./config/cloudinary";
 import connectDatabase from "./config/database";
 import userRoutes from "./routes/userRoute";
-import cookieparser from "cookie-parser";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(
 app.use(express.urlencoded({ extended: true }));
 
 connectDatabase();
+cloudinaryConnect();
 
 const PORT = process.env.PORT || 8000;
 
